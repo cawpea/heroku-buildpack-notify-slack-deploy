@@ -15,7 +15,8 @@ export_env_dir() {
 
 export_env_dir $3
 
-SLACK_MESSAGE="*$HEROKU_APP_NAME* was deployed - $HEROKU_SLUG_DESCRIPTION"
+GITHUB_COMMIT_URL="$GITHUB_REPOSITORY_URL/commit/$HEROKU_SLUG_COMMIT"
+SLACK_MESSAGE="*$HEROKU_APP_NAME* was deployed - $HEROKU_SLUG_DESCRIPTION\n$GITHUB_COMMIT_URL"
 echo "-----> Notifying Slack of this deploy"
 echo "       $SLACK_MESSAGE"
 curl -s -X POST -H 'Content-type: application/json' --data "{\"text\":\"$SLACK_MESSAGE\"}" $SLACK_DEPLOYMENT_WEBHOOK_URL
